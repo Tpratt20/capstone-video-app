@@ -1,0 +1,19 @@
+{% extends 'video_collection/base.html' %}
+
+{% block content %}
+
+<h2>Video List</h2>
+
+{% comment %} for loop that prints all videos from the videos object along with a clickable video link{% endcomment %}
+{% for video in videos %}
+
+    <div>
+        <h3>{{ video.name }}</h3>
+        <p>{{ video.notes }}</p>
+        <a href="{{video.url}}">{{ video.url }}</a>
+    </div>
+
+{% endfor %}
+
+{% endblock %}
+
