@@ -1,0 +1,20 @@
+{% extends 'video_collection/base.html' %}
+
+{% block content %}
+
+<h2>Add new video</h2>
+
+{% comment %} for loop that iterates through the messages object looking for messages added in the add view, displaying each message before deleting them {% endcomment %}
+{% for message in messages %}
+<li>{{ message }}</li>
+{% endfor %}
+
+{% comment %} html form that displays either the new form or the invalid form from add view {% endcomment %}
+<form method="POST" action="{% url 'add_video' %}">
+    {% csrf_token %}
+    {{ new_video_form }}
+    <button type="submit">Add video</button>
+</form>
+
+
+{% endblock %}

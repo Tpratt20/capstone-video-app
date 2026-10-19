@@ -15,8 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
+#if a request is not to /admin, routes the request to urls.py in the video_collection app
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('video_collection.urls'))
 ]

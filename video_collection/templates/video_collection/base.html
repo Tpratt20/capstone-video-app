@@ -1,0 +1,18 @@
+{% load static %}
+
+<html>
+<head>
+    <title>Video Collection</title>
+    {% comment %} links to premade styles from https://watercss.kognise.dev/{% endcomment %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
+    {% comment %} links to our local style sheet {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    {% comment %} Views that extend this file will place the content of their blocks here {% endcomment %}
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>
