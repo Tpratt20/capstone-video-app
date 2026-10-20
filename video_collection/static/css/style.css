@@ -1,0 +1,8 @@
+.navigation {
+    margin: 20px;
+}
+
+.navigation > a {
+    color: orange;
+    padding-right: 30px;
+}
