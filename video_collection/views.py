@@ -22,7 +22,7 @@ def add(request):
                 new_video_form.save()
                 return redirect('video_list')
             except ValidationError:
-                messages.warning(request, 'Invalid Youtube URL')
+                messages.warning(request, 'Invalid YouTube URL')
             except IntegrityError:
                 messages.warning(request, 'You already added that video')
 

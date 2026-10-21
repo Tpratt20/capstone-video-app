@@ -13,11 +13,21 @@ class Video(models.Model):
         """Add additional functionality to the inherited django save function"""
 
         #raises error if the video's url doesn't start with the string passed to the startswith function
-        if not self.url.startswith('https://www.youtube.com/watch'):
-            raise ValidationError(f'Not a Youtube URL {self.url}')
+        # if not self.url.startswith('https://www.youtube.com/watch'):
+        #     raise ValidationError(f'Not a Youtube URL {self.url}')
 
         # extracts the video id from a youtube url
         url_components = parse.urlparse(self.url)
+
+        if url_components.scheme != 'https':
+            raise ValidationError(f'Invalid YouTube URL {self.url}')
+
+        if url_components.netloc != 'www.youtube.com':
+            raise ValidationError(f'Invalid YouTube URL {self.url}')
+
+        if url_components.path != '/watch':
+            raise ValidationError(f'Invalid YouTube URL {self.url}')
+
         query_string = url_components.query #v=123456
         #checks if url has a query string, else raises error
         if not query_string:
