@@ -27,6 +27,9 @@
         {% comment %} iframe allows videos to be embedded in the page. referrerpolicy resolves an issue between youtubes embed feature and django default settings{% endcomment %}
         <iframe referrerpolicy="strict-origin-when-cross-origin" width="420" height="315" src="https://youtube.com/embed/{{ video.video_id }}"></iframe>
         <p><a href="{{video.url}}">{{ video.url }}</a></p>
+
+        {% comment %} hyperlink that redirects to video detail page, passing the pk for the associated video into the url template {% endcomment %}
+        <a href="{% url "video_detail" video_pk=video.pk %}">View Video Details</a>
     </div>
 
 {% empty %}

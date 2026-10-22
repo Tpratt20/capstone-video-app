@@ -1,0 +1,30 @@
+{% extends 'video_collection/base.html' %}
+
+{% block content %}
+
+{% comment %} Displays basic information about the video {% endcomment %}
+<h1>Video Details</h1>
+
+<h3>Video Name</h3>
+<p>{{ video.name }}</p>
+
+<h3>Video URL</h3>
+<p><a href="{{video.url}}">{{ video.url }}</a></p>
+
+<h3>Video Notes</h3>
+{% comment %} Displays notes if they exist, else displays 'No notes' message {% endcomment %}
+{% if video.notes %}
+    {{ video.notes }}
+{% else %}
+    <p>No notes</p>
+{% endif %}
+
+<h3>Watch Video</h3>
+{% comment %} Embeds the video in the webpage {% endcomment %}
+<iframe referrerpolicy="strict-origin-when-cross-origin" width="420" 
+height="315" src="https://youtube.com/embed/{{ video.video_id }}"></iframe>
+
+
+
+
+{% endblock %}

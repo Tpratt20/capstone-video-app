@@ -5,6 +5,7 @@ from django.db import IntegrityError
 from django.db.models.functions import Lower
 from .forms import VideoForm, SearchForm
 from .models import Video
+from django.shortcuts import get_object_or_404
 
 
 def home(request):
@@ -13,7 +14,7 @@ def home(request):
     return render(request, 'video_collection/home.html', {'app_name': app_name})
 
 def add(request):
-    """view that has split functionality depending on the request method. If method is GET, directs user to a new form to add a new video. If method is POST, saves that video to the database and displays a confirmation message"""
+    """view that has split functionality depending on the request method. If method is GET, directs user to a new form to add a new video. If method is POST, saves that video to the database"""
     if request.method == 'POST':
         new_video_form = VideoForm(request.POST)
         if new_video_form.is_valid():
@@ -51,3 +52,10 @@ def video_list(request):
 
     
     return render(request, 'video_collection/video_list.html', {'videos': videos, 'search_form': search_form})
+
+
+def video_detail(request, video_pk):
+    """View that receives the video pk from the url, retrieves the video object from the db using the Video model(else raises and returns 404), then passes the video object to the video_detail.html template using the context dictionary, which is passed as an argument to the render function."""
+    video = get_object_or_404(Video, pk=video_pk)
+
+    return render(request, 'video_collection/video_detail.html', {'video': video})

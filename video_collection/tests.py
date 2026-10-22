@@ -192,4 +192,32 @@ class TestVideoModel(TestCase):
             url='https://www.youtube.com/watch?v=123')
 
 
-    
+class TestVideoDetail(TestCase):
+
+    def test_video_detail_page_shows_correct_info(self):
+
+        #create Video object using the Video model, represented in the database as a row and table, respectively.
+        v1 = Video.objects.create(name='example name', notes='example notes', url='https://www.youtube.com/watch?v=hblIsx6K4UI')
+
+        #constructs the url for video page, passing the pk for the new video into the url pattern
+        url = reverse('video_detail', kwargs={'video_pk': v1.pk})
+
+        #creates a get request using the url, then stores the response in a variable
+        response = self.client.get(url)
+
+        #confirms that response.content contains the correct field values of the new video
+        self.assertContains(response, v1.name)
+        self.assertContains(response, v1.url)
+        self.assertContains(response, v1.notes)
+
+
+    def test_request_to_invalid_video_page_returns_404(self):
+
+        #constructs a url containing a video pk that is not in the test database
+        url = reverse('video_detail', kwargs={'video_pk': 300})
+
+        #creates a get request using the url, then stores the response in a variable
+        response = self.client.get(url)
+
+        #confirms that the response status code attribute is equal to 404
+        self.assertEqual(response.status_code, 404)
